@@ -37,21 +37,6 @@
 }
 \lstset{style=mystyle}
 
-
-% \begin{figure}[!ht]
-% 	\centering
-% \hspace*{\fill}%
-% 	\begin{subfigure}[b]{0.49\textwidth}
-%         \centering
-% 		\includegraphics[width=1\textwidth]{2_18.png}
-% 	\end{subfigure}
-% \hfill
-% 	\begin{subfigure}[b]{0.49\textwidth}
-%         \centering
-% 		\includegraphics[width=1\textwidth]{2_19.png}
-% 	\end{subfigure}
-%     \caption{Функция и её сэмплированный вариант}
-% \end{figure}
 \section{Получение передаточной функции}
 Выполним некоторые преобразования:
 $$
@@ -61,7 +46,12 @@ $$
 	y = \frac{6p^2 + 4p + 16}{p^3 + 6p^2 + 11p + 6}[u] + 0
 \end{aligned}
 $$
-
+Схема для \textit{Simulink} будет выглядеть следующим образом:
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{scheme_transfer_fcn.png}
+	\caption{Схема - передаточная функция}
+\end{figure}
 
 В нашем случае передаточная функция $W(p)$ будет выглядеть следующим образом:
 $$
@@ -179,14 +169,32 @@ $$
 \section{Моделирование полученных форм}
 Составим схемы с учётом того, что должны быть видны чётко каналы, соответствующие компонентам векторов состояния $x$:
 
+Проверим результат из первого задания с помощью передаточной функции, её схема была выше, результат:
+
+\begin{figure}[h]
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{input_task1_transfer_fcn.png} 
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{output_task1_transfer_fcn.png}
+	\end{subfigure}
+	\caption{Симуляция - передаточная функция}
+\end{figure}
+
+\newpage
+
 \begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{scheme_task2_controlled.png}
 	\caption{Схема системы - управляемая форма}
 \end{figure}
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{output_task2_controlled.png}
+\begin{figure}[h]
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{input_task2_controlled.png} 
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{output_task2_controlled.png}
+	\end{subfigure}
 	\caption{Симуляция - управляемая форма}
 \end{figure}
 
@@ -196,27 +204,59 @@ $$
     \includegraphics[width=1\textwidth]{scheme_task2_observable.png}
 	\caption{Схема системы - наблюдаемая форма}
 \end{figure}
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{output_task2_controlled.png}
+\begin{figure}[h]
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{input_task2_observable.png} 
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{output_task2_observable.png}
+	\end{subfigure}
 	\caption{Симуляция - наблюдаемая форма}
 \end{figure}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=1\textwidth]{scheme_task2_observable.png}
+	\caption{Схема системы - контролируемая форма}
+\end{figure}
+\begin{figure}[h]
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{input_task2_controlled.png} 
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{output_task2_controlled.png}
+	\end{subfigure}
+	\caption{Симуляция - контролируемая форма}
+\end{figure}
+
 \newpage
-\begin{figure}[ht] 
+\begin{figure}[ht]
     \centering
     \includegraphics[width=1\textwidth]{scheme_task2_diagonal.png}
 	\caption{Схема системы - диагональная форма}
 \end{figure}
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=0.5\textwidth]{output_task2_diagonal.png}
+\begin{figure}[h]
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{input_task2_diagonal.png} 
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{output_task2_diagonal.png}
+	\end{subfigure}
 	\caption{Симуляция - диагональная форма}
 \end{figure}
 
+\newpage
+
+Сведём четыре формы в один график, чтобы убедиться, что они совпадают:
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.5\textwidth]{output_task2_all.png}
+	\caption{Симуляция - сравнение форм}
+\end{figure}
+Как можно заметить, все цвета друг на друга наложились.
 \section{Выводы}
 
-Невооружённым взглядом видно, что все графики вышли идентичными между собой и по сравнению с формой В-В.
+Графики трёх форм В-С-В и реализацию через передаточную функцию(по сути В-В) вышли идентичными между собой.
 
 Несложно понять почему это так - ведь мы меняем только вид схемы, меняем точку зрения на систему.
 

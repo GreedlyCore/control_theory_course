@@ -2,39 +2,6 @@
 \label{ch:chap3}
 \section{Математическая модель системы}
 
-
-% \begin{itemize}
-% 	\item Диагональная форма:
-% 	$$
-% 	\feqvector{\dot{x_1}, \dot{x_2}, \dot{x_3}} = 
-% 	  \begin{bmatrix}
-% 		  \lambda_1 & 0 & 0  \\
-% 		  0 & \lambda_2 & 0 \\
-% 		  0 & 0 & \lambda_3
-% 		  \end{bmatrix}
-% 	  \feqvector{x_1, x_2, x_3} + \feqvector{\beta_1, \beta_2, \beta_3}u
-% 	$$
-  
-% 	$$
-% 	y = \feqvector[&]{\gamma_1, \gamma_2, \gamma_3}\feqvector{x_1, x_2, x_3}
-% 	$$
-% 	\item С моими коэффициентами:
-% 	$$
-% 	\feqvector{\dot{x_1}, \dot{x_2}, \dot{x_3}} = 
-% 	  \begin{bmatrix}
-% 		  -2 & 0 & 0  \\
-% 		  0 & -3 & 0 \\
-% 		  0 & 0 & -1
-% 		  \end{bmatrix}
-% 	  \feqvector{x_1, x_2, x_3} + \feqvector{-8, 29, 3}u
-% 	$$
-  
-% 	$$
-% 	y = \feqvector[&]{4, 1, 3}\feqvector{x_1, x_2, x_3}
-% 	$$
-%   \end{itemize}
-
-
 Рассмотрим следующую систему:
 $$
 \begin{aligned}
@@ -90,11 +57,15 @@ $$
 \end{figure}
 
 \section{Графики сигналов u(t) и y(t)}
- 
-\begin{figure}[ht]
-  \centering
-  \includegraphics[width=1\textwidth]{output_task3_multiple_EE_1.png}
-\caption{Симуляция - $u_1(t) = 1 , u_2(t) = 2sin(t)$}
+
+\begin{figure}[h]
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{input_task3_multiple_EE_1.png} 
+	\end{subfigure}
+	\begin{subfigure}{0.5\textwidth}
+		\includegraphics[width=0.9\linewidth, height=6cm]{output_task3_multiple_EE_1.png}
+	\end{subfigure}
+	\caption{Симуляция - $u_1(t) = 1 , u_2(t) = 2sin(t)$}
 \end{figure}
 
 \endinput
