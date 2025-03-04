@@ -1,0 +1,177 @@
+\documentclass[a4paper,14pt,oneside,openany]{article}
+
+
+\usepackage{listings}
+\usepackage{indentfirst} 
+
+\usepackage{fontspec}     
+\setmainfont{CMU Serif}   
+\newfontfamily\cyrillicfonttt{DejaVu Sans Mono} 
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+\setotherlanguage{english}
+
+\renewcommand{\lstlistingname}{Листинг}
+% Отображение страницы
+\usepackage{geometry} % размеры листа и отступов
+\geometry{
+	left=12mm,
+	top=25mm,
+	right=15mm,
+	bottom=17mm,
+	marginparsep=0mm,
+	marginparwidth=0mm,
+	headheight=10mm,
+	headsep=7mm,
+	nofoot}
+\usepackage{afterpage,fancyhdr} % настройка колонтитулов
+\pagestyle{fancy}
+\fancypagestyle{style}{ % создание нового стиля style
+	\fancyhf{} % очистка колонтитулов
+	\fancyhead[LO, RE]{} % название документа наверху
+	\fancyhead[RO, LE]{\leftmark} % название section наверху
+	\fancyfoot[RO, LE]{\thepage} % номер страницы справа внизу на нечетных и слева внизу на четных
+	\renewcommand{\headrulewidth}{0.25pt} % толщина линии сверху
+	\renewcommand{\footrulewidth}{0pt} % толцина линии снизу
+}
+\fancypagestyle{plain}{ % создание нового стиля plain -- полностью пустого
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+}
+\fancypagestyle{title}{ % создание нового стиля title -- для титульной страницы
+	\fancyhf{}
+	\fancyhead[C]{{\footnotesize \Large
+			Министерство образования и науки Российской Федерации\\
+			Федеральное государственное автономное образовательное учреждение высшего образования
+	}}
+	\fancyfoot[C]{{\large 
+			Санкт-Петербург, \the\year
+	}}
+	\renewcommand{\headrulewidth}{0pt}
+}
+
+% Математика
+\usepackage{amsmath, amsfonts, amssymb, amsthm} % Набор пакетов для математических текстов
+%\usepackage{dmvnbase} % мехматовский пакет latex-сокращений
+\usepackage{cancel} % зачеркивание для сокращений
+% Рисунки и фигуры
+\usepackage{graphicx}        
+% \usepackage[unicode]{hyperref} % Was: \usepackage[unicode,pdftex]{hyperref}
+\usepackage{wrapfig, subcaption} % вставка фигур, обтекая текст
+\usepackage{caption} % для настройки подписей
+\captionsetup{figurewithin=none,labelsep=period, font={small,it}} % настройка подписей к рисункам
+% Рисование
+\usepackage{tikz} % рисование
+\usepackage{circuitikz}
+\usepackage{pgfplots} % графики
+% Таблицы
+\usepackage{multirow} % объединение строк
+\usepackage{multicol} % объединение столбцов
+% Остальное
+\usepackage{enumitem} % нормальное оформление списков
+\usepackage{awesomebox}
+\usepackage{tabularx}
+\usepackage{hyperref} % гиперссылки
+\usepackage{cleveref} % гиперссылки2
+
+% Настройки стиля для листинга
+\lstdefinestyle{mystyle}{
+backgroundcolor=\color{gray!10!white},
+basicstyle=\ttfamily,
+language=Python,
+numbers=left,
+numberstyle=\small,
+numbersep=5pt,
+breaklines=true,
+showstringspaces=false,
+keywordstyle=\color{blue},
+commentstyle=\color{green!40!black},
+stringstyle=\color{green!40!black},
+frame=single,
+rulecolor=\color{black},
+tabsize=2,
+basicstyle=\small\ttfamily,
+}
+
+
+\setlist{itemsep=0.15cm,topsep=0.15cm,parsep=1pt} % настройки списков
+% Теоремы, леммы, определения...
+\theoremstyle{definition}
+\newtheorem{Def}{Определение}
+\newtheorem*{Axiom}{Аксиома}
+\theoremstyle{plain}
+\newtheorem{Th}{Теорема}
+\newtheorem{Lem}{Лемма}
+\newtheorem{Cor}{Следствие}
+\newtheorem{Ex}{Пример}
+\theoremstyle{remark}
+\newtheorem*{Note}{Замечание}
+\newtheorem*{Solution}{Решение}
+\newtheorem*{Proof}{Доказательство}
+
+\DeclareMathOperator{\sinc}{sinc}
+\DeclareMathOperator{\Si}{Si}
+
+% Свои команды
+\newcommand{\comb}[1]{\left[\hspace{-4pt}\begin{array}{l}#1\end{array}\right.\hspace{-5pt} } % совокупность уравнений
+% Титульный лист
+\usepackage{csvsimple-l3}
+
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+% https://tex.stackexchange.com/questions/2705/typesetting-column-vector
+% Column Vector Macros
+% EXAMPLE: \colvec{5}{a}{b}{c}{d}{e}
+\newcount\colveccount
+\newcommand*\colvec[1]{
+        \global\colveccount#1
+        \begin{pmatrix}
+        \colvecnext
+}
+\def\colvecnext#1{
+        #1
+        \global\advance\colveccount-1
+        \ifnum\colveccount>0
+                \\
+                \expandafter\colvecnext
+        \else
+                \end{pmatrix}
+        \fi
+}
+
+% https://tex.stackexchange.com/questions/39051/typesetting-a-row-vector
+% Row Vector Macros
+% EXAMPLE: \rowvec{a,b,c,d,e}
+\newcommand*{\rowvec}[1]{\left( #1\right)}
+
+% \ExplSyntaxOn
+% \clist_new:N \l_feq_vector_clist
+% \NewDocumentCommand{\feqvector}{O{\\}mO{b}}{
+%   \clist_set:Nn \l_feq_vector_clist {#2} % Set the list
+%   \begin{#3matrix}
+%   \clist_use:Nn \l_feq_vector_clist {#1} % show it with separator from #1 (\\)
+%   \end{#3matrix}
+% }
+% \ExplSyntaxOff
+
+%%% Вставляем по очереди все содержательные части документа %%%
+\input{title}
+
+\begin{document}
+\titlePage                                          % Титульник
+\pagestyle{style}
+\newpage
+
+\tableofcontents                                   % Автособираемое оглавление
+
+\input{chapter1}
+\input{chapter2}
+\input{chapter3}
+\input{chapter4}
+\input{chapter5}
+\input{conclusions}
+
+% \printbibliography[title=Список использованных источников] % Автособираемый список литературы
+
+\end{document}
