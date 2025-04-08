@@ -1,0 +1,119 @@
+\chapter{Синтез математической модели тележки}
+\label{ch:chap1}
+
+Рассмотрим систему:
+$$
+  \begin{cases}
+    \dot{x} = Ax + Bu + B_w w \\
+    y = Cx + D_w w
+  \end{cases}
+$$ и сформируем математическую модель такого объекта:
+
+$$
+  A = \begin{bmatrix}
+  0 & 1 \\
+  0 & 0 \\
+  \end{bmatrix} \tab
+  B = \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix} \tab
+  C = \begin{bmatrix}
+    1 & 0
+  \end{bmatrix}
+$$
+
+В качестве измеряемого выхода мы имеем $y(t)$, в формировании которого нам будут мешать внешние возмущение $w$,
+которое будет формироваться посредством матриц $B_w, D_w$. 
+
+Эти возмущения в общем виде мы зададим следующим образом, меняться будет только частота $f$ и фазовый сдвиг $\phi = \frac{7\pi}{2}$ (везде он будет оставаться постоянным) внутри :
+$$
+  w(t) = sin(2\pi \cdot f \cdot t + \phi) 
+$$
+$$
+  B_w = \begin{bmatrix}
+  0 & 0 \\ 
+  1 & 0 \\ 
+  \end{bmatrix} \tab
+  D_w = \begin{bmatrix}
+    0 & 1 
+  \end{bmatrix}
+$$
+
+Зададим варианты регулируемого выхода, не менее 2-х штук:
+$$
+  z(t) = C_Z x + D_Z u
+$$
+Пусть:
+$$
+  C_{Z1} = \begin{bmatrix}
+  1 & 2 \\ 
+  0 & 0 \\ 
+  \end{bmatrix} \tab
+  D_{Z1} = \begin{bmatrix}
+    0 \\ 1
+  \end{bmatrix}
+$$
+$$
+  C_{Z2} = \begin{bmatrix}
+  3 & 1 \\
+  0 & 0 
+  \end{bmatrix} \tab
+  D_{Z2} = \begin{bmatrix}
+    0 \\ 2
+  \end{bmatrix}
+$$
+
+% % Проверка независимости
+% Cz'*Dz % == 0
+% Bw*Dw' % == 0
+% % Проверка невырожденности
+% Dw*Dw' % == scalar number
+% Dz'*Dz % == scalar number
+Для выбранных матричных пар можно сразу проверить два условия - "невырожденности" и "независимости":
+$$
+  C_{Z1}^T D_{Z1} = \begin{bmatrix}
+    1 & 0 \\ 
+    2 & 0 \\ 
+    \end{bmatrix} \begin{bmatrix}
+      0 \\ 1
+    \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}, \tab 
+    B_w D_w^T = \begin{bmatrix}
+      0 & 0 \\ 
+      1 & 0 \\ 
+      \end{bmatrix} \begin{bmatrix}
+        0 \\ 1 
+      \end{bmatrix} =  \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+$$
+
+$$
+  D_w D_w^T = \begin{bmatrix}
+    0 & 1 \\ 
+    
+    \end{bmatrix} \begin{bmatrix}
+      0 \\ 1
+    \end{bmatrix} = 1, \tab
+    D_{Z1}^T D_{Z1} = \begin{bmatrix}
+      0 & 1 \\ 
+      
+      \end{bmatrix} \begin{bmatrix}
+        0 \\ 1
+      \end{bmatrix} = 1,
+$$
+
+$$
+  C_{Z2}^T D_{Z2} = \begin{bmatrix}
+    3 & 0 \\ 
+    1 & 0 \\ 
+    \end{bmatrix} \begin{bmatrix}
+      0 \\ 2
+    \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}, \tab 
+    D_{Z2}^T D_{Z2} = \begin{bmatrix}
+      0 & 2 \\ 
+      
+      \end{bmatrix} \begin{bmatrix}
+        0 \\ 2
+      \end{bmatrix} = 4,
+$$
+Как можно заметить, у обеих пар выполняется оба условия.
+
+\endinput
